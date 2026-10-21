@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harshvardhan Kumbharkar — Backend &amp; AI Developer</title>
+<meta name="description" content="Harshvardhan Kumbharkar builds backend and AI systems in Python: computer vision for construction-site safety, and NyayaSathi, a local legal research assistant for Indian law students.">
+<meta property="og:title" content="Harshvardhan Kumbharkar — Backend & AI Developer">
+<meta property="og:description" content="Backend and AI systems that have to be right. Computer vision, retrieval-grounded LLMs, FastAPI.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#f3efe6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14130f" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#work">Skip to work</a>
+
+<div class="page">
+  <aside class="rail" aria-label="Sections">
+    <a class="mark" href="#top" aria-label="Back to top">HK</a>
+    <nav>
+      <a href="#work"><span>01</span>Work</a>
+      <a href="#research"><span>02</span>Research</a>
+      <a href="#background"><span>03</span>Background</a>
+      <a href="#contact"><span>04</span>Contact</a>
+    </nav>
+    <p class="rail-foot">Pune, IN<br><span id="clock">IST</span></p>
+  </aside>
+
+  <main id="top">
+    <!-- 00 — Intro -->
+    <header class="intro">
+      <p class="eyebrow">Harshvardhan Kumbharkar · Backend &amp; AI developer</p>
+      <h1>I build software that has to be <em>right</em>, not just plausible.</h1>
+      <p class="lede">
+        A camera system that knows which worker on a construction site isn't wearing a helmet.
+        A legal research tool that would rather say “not found” than invent a Supreme Court case.
+        I like the part of AI work where you check the output against reality.
+      </p>
+      <dl class="facts">
+        <div><dt>Now</dt><dd>B.Tech, AI &amp; Data Science, AISSMS IOIT, Pune (2022–26)</dd></div>
+        <div><dt>Stack</dt><dd>Python · FastAPI · PyTorch · YOLOv8 · local LLMs</dd></div>
+        <div><dt>Published</dt><dd>2 papers: game AI, construction-site safety</dd></div>
+      </dl>
+      <div class="cta">
+        <a class="btn" href="#work">See the work</a>
+        <a class="btn ghost" href="Harshvardhan-Kumbharkar-Resume.pdf" download>Résumé (PDF)</a>
+      </div>
+    </header>
+
+    <!-- 01 — Work -->
+    <section id="work" aria-labelledby="work-h">
+      <h2 id="work-h"><span>01</span>Work</h2>
+
+      <article class="case">
+        <div class="case-head">
+          <p class="tag">2026 · Legal tech · Local LLM</p>
+          <h3>NyayaSathi</h3>
+          <p class="sub">A study assistant for Indian law students that runs on a laptop and cites its sources.</p>
+        </div>
+        <div class="case-body">
+          <p>
+            Law students using ChatGPT get confident answers with made-up case citations. NyayaSathi takes
+            plain words like <i>“cheque bounce”</i> or <i>“land acquisition”</i> and returns the actual statute
+            sections and the leading Supreme Court judgments, read from Indian Kanoon.
+          </p>
+          <p>
+            The design rule: the model never decides what the law is. It only turns your words into search
+            keywords and summarises text it has been given. Section lookup, the old-to-new law mapping and
+            citation checks are plain code, so they can't hallucinate.
+          </p>
+          <ul class="metrics">
+            <li><b>3,300+</b><span>sections parsed from 10 major Acts</span></li>
+            <li><b>IPC 420 → BNS 318(4)</b><span>old-to-new criminal law mapping, down to the sub-section</span></li>
+            <li><b>4 verdicts</b><span>a citation is verified, wrong for that case, belongs to another case, or not found</span></li>
+          </ul>
+          <figure class="terminal" aria-label="Example NyayaSathi queries and results">
+            <figcaption>real outputs from testing</figcaption>
+<pre><span class="p">›</span> cheque bounce
+  <span class="o">laws </span> NI Act §138 · §139 · §118
+  <span class="o">cases</span> Rangappa v. Sri Mohan (2010)
+        Dashrath Rupsingh Rathod v. State of Maharashtra (2014)
+
+<span class="p">›</span> Maneka Gandhi v Union of India (1978) 1 SCC 248
+  <span class="ok">✓ verified</span>  Supreme Court of India · 25 Jan 1978
+
+<span class="p">›</span> Priya Sharma v Union of India (2021) 3 SCC 412
+  <span class="no">✗ not found</span>  possibly fabricated — don't cite it</pre>
+          </figure>
+          <p class="stack">Python · FastAPI · Ollama (Qwen3 8B) · Indian Kanoon · vanilla JS</p>
+          <p class="links"><a href="https://github.com/HarshKnight2477/nyayasathi">Source on GitHub ↗</a></p>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="case-head">
+          <p class="tag">Computer vision · Safety</p>
+          <h3>Helmet Monitoring &amp; Face Recognition</h3>
+          <p class="sub">Spots helmet violations on a construction site and works out who they belong to, in real time.</p>
+        </div>
+        <div class="case-body">
+          <p>
+            YOLOv8 finds people and helmets. A bounding-box check decides whether the helmet is actually
+            on the head or just nearby, and InsightFace matches the face against known workers using
+            normalised embeddings and cosine similarity. Frames are streamed and processed asynchronously
+            over WebSockets, so the dashboard stays live.
+          </p>
+          <ul class="metrics">
+            <li><b>96.1%</b><span>mAP@0.5 for helmet detection</span></li>
+            <li><b>69.2%</b><span>mAP@0.5:0.95</span></li>
+            <li><b>1 paper</b><span>a survey of the approaches, published in IJARSCT</span></li>
+          </ul>
+          <p class="stack">YOLOv8 · InsightFace · OpenCV · FastAPI · WebSockets</p>
+          <p class="links"><a href="https://github.com/HarshKnight2477/Helmet-Monitoring-Face-Recognition">Source on GitHub ↗</a></p>
+        </div>
+      </article>
+
+      <div class="minor">
+        <article>
+          <h3>Public Service Management System</h3>
+          <p>A deep-learning classifier that sorts and prioritises citizen complaints, so officials don't triage them by hand. Deployed on Render.</p>
+          <p class="stack">Deep learning · Python · Render</p>
+          <a href="https://github.com/HarshKnight2477/Complaint-Manager-Project">GitHub ↗</a>
+        </article>
+        <article>
+          <h3>NLP Chatbot</h3>
+          <p>An intent-based conversational assistant: tokenisation, stemming and vectorisation feeding an intent classifier, with structured responses for each conversation flow.</p>
+          <p class="stack">NLP · Python</p>
+          <a href="https://github.com/HarshKnight2477/Desktop-Assistant-">GitHub ↗</a>
+        </article>
+        <article>
+          <h3>Resume Management System</h3>
+          <p>A backend for storing and retrieving structured résumé profiles, built around a clean database design and a modular API layer.</p>
+          <p class="stack">Backend · SQL · APIs</p>
+        </article>
+        <article>
+          <h3>Dataset Metadata</h3>
+          <p>Cleaned, categorised and documented metadata for 7 structured and unstructured datasets, so they could be found and reused.</p>
+          <p class="stack">Data cleaning · Documentation</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- 02 — Research -->
+    <section id="research" aria-labelledby="research-h">
+      <h2 id="research-h"><span>02</span>Research</h2>
+      <ol class="papers">
+        <li>
+          <p class="venue">IJFMR · 2025</p>
+          <h3>Emergent Minds: The Evolution and Future of AI in Video Game NPCs</h3>
+          <p>How non-player characters moved from rule-based scripts towards adaptive, AI-driven behaviour, and where that is heading.</p>
+          <a href="https://doi.org/10.36948/ijfmr.2025.v07i03.42387">doi.org/10.36948/ijfmr.2025.v07i03.42387 ↗</a>
+        </li>
+        <li>
+          <p class="venue">IJARSCT</p>
+          <h3>AI-Based Helmet Monitoring and Face Recognition System at Building Construction Site: A Survey</h3>
+          <p>A survey of computer-vision and face-recognition approaches for automated safety compliance on construction sites.</p>
+          <a href="https://doi.org/10.48175/IJARSCT-29820">doi.org/10.48175/IJARSCT-29820 ↗</a>
+        </li>
+      </ol>
+    </section>
+
+    <!-- 03 — Background -->
+    <section id="background" aria-labelledby="bg-h">
+      <h2 id="bg-h"><span>03</span>Background</h2>
+
+      <div class="grid">
+        <div class="block">
+          <h3>Education</h3>
+          <dl class="timeline">
+            <div><dt>2022–26</dt><dd><b>B.Tech, Artificial Intelligence &amp; Data Science</b><br>AISSMS Institute of Information Technology, Pune · CGPA 7.19</dd></div>
+            <div><dt>2020–22</dt><dd><b>Higher Secondary</b><br>Airforce College, Viman Nagar, Pune</dd></div>
+            <div><dt>2020</dt><dd><b>CISCE</b><br>Bishop’s Co-Ed School, Undri, Pune</dd></div>
+          </dl>
+        </div>
+
+        <div class="block">
+          <h3>Experience</h3>
+          <dl class="timeline">
+            <div><dt>2023</dt><dd><b>Campus Ambassador, Internshala</b> · 3 months<br>Ran campus outreach for internship and skill-development programmes: direct student engagement, peer communication and promotion.</dd></div>
+          </dl>
+        </div>
+
+        <div class="block">
+          <h3>Skills</h3>
+          <dl class="skills">
+            <div><dt>Languages</dt><dd>Python, C++, SQL</dd></div>
+            <div><dt>Backend</dt><dd>FastAPI, REST, WebSockets, database design</dd></div>
+            <div><dt>ML / AI</dt><dd>PyTorch, scikit-learn, YOLOv8, InsightFace, OpenCV, NLP, local LLMs (Ollama)</dd></div>
+            <div><dt>Data</dt><dd>NumPy, Pandas, Power BI, Tableau</dd></div>
+            <div><dt>Cloud</dt><dd>AWS fundamentals, Render</dd></div>
+          </dl>
+        </div>
+
+        <div class="block">
+          <h3>Certifications</h3>
+          <ul class="plain">
+            <li>Microsoft Azure AI Fundamentals (AI-900)</li>
+            <li>AWS Academy Cloud Foundations · 2025</li>
+            <li>UiPath RPA Developer Foundation</li>
+            <li>Oracle Academy: Java Foundations</li>
+            <li>Oracle Academy: Database Programming with SQL</li>
+          </ul>
+        </div>
+
+        <div class="block wide">
+          <h3>Languages</h3>
+          <div class="langs">
+            <div class="ielts">
+              <p class="ielts-head"><b>English</b> · IELTS Academic, Aug 2026</p>
+              <p class="band"><span class="score">7.5</span><span class="of">overall · CEFR C1</span></p>
+              <ul class="bands" aria-label="IELTS band scores out of 9">
+                <li><span>Listening</span><i style="--v:8.5"></i><b>8.5</b></li>
+                <li><span>Reading</span><i style="--v:7.0"></i><b>7.0</b></li>
+                <li><span>Speaking</span><i style="--v:7.5"></i><b>7.5</b></li>
+                <li><span>Writing</span><i style="--v:6.5"></i><b>6.5</b></li>
+              </ul>
+            </div>
+            <ul class="plain other-langs">
+              <li><b>Hindi</b></li>
+              <li><b>Marathi</b> · first language</li>
+              <li><b>Japanese</b> · JLPT N5</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 — Contact -->
+    <section id="contact" aria-labelledby="contact-h">
+      <h2 id="contact-h"><span>04</span>Contact</h2>
+      <p class="contact-line">Hiring for backend or applied-AI work, or want to talk about a project? Email is the fastest way to reach me.</p>
+      <p class="email">
+        <a href="mailto:harsh777766@gmail.com">harsh777766@gmail.com</a>
+        <button type="button" class="copy" data-copy="harsh777766@gmail.com">Copy</button>
+      </p>
+      <ul class="elsewhere">
+        <li><a href="https://github.com/HarshKnight2477">GitHub ↗</a></li>
+        <li><a href="https://www.linkedin.com/in/harshvardhan-kumbharkar-4a4241273">LinkedIn ↗</a></li>
+        <li><a href="Harshvardhan-Kumbharkar-Resume.pdf" download>Résumé PDF ↓</a></li>
+      </ul>
+    </section>
+
+    <footer>
+      <p>© <span id="year">2026</span> Harshvardhan Kumbharkar. Plain HTML and CSS, no frameworks.</p>
+    </footer>
+  </main>
+</div>
+
+<script src="script.js" defer></script>
+</body>
+</html>
