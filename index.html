@@ -39,11 +39,12 @@
       <p class="lede">
         A camera system that knows which worker on a construction site isn't wearing a helmet.
         A legal research tool that would rather say “not found” than invent a Supreme Court case.
+        A coding tutor small enough to run offline on an ordinary school PC.
         I like the part of AI work where you check the output against reality.
       </p>
       <dl class="facts">
         <div><dt>Now</dt><dd>B.Tech, AI &amp; Data Science, AISSMS IOIT, Pune (2022–26)</dd></div>
-        <div><dt>Stack</dt><dd>Python · FastAPI · PyTorch · YOLOv8 · local LLMs</dd></div>
+        <div><dt>Stack</dt><dd>Python · FastAPI · PyTorch · YOLOv8 · local LLMs (llama.cpp, Ollama)</dd></div>
         <div><dt>Published</dt><dd>2 papers: game AI, construction-site safety</dd></div>
       </dl>
       <div class="cta">
@@ -93,6 +94,42 @@
           </figure>
           <p class="stack">Python · FastAPI · Ollama (Qwen3 8B) · Indian Kanoon · vanilla JS</p>
           <p class="links"><a href="https://github.com/HarshKnight2477/nyayasathi">Source on GitHub ↗</a></p>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="case-head">
+          <p class="tag">2026 · Education · Small language models</p>
+          <h3>Edu.ai</h3>
+          <p class="sub">An offline coding tutor that runs on the old computers schools actually have.</p>
+        </div>
+        <div class="case-body">
+          <p>
+            Most AI tutors need a fast GPU or a cloud subscription, and send student data off the machine.
+            Edu.ai runs a small language model on the CPU through llama.cpp, with no internet connection,
+            and helps beginners learn programming: it explains concepts at their level, helps debug code,
+            and gives hints instead of answers for homework.
+          </p>
+          <p>
+            I picked the model by benchmarking six candidates on CPU for coding, debugging, quiz accuracy,
+            speed and memory, then tuned the tutoring prompts against my own evaluation sets. Answers draw on
+            70 sections of original course notes, searched locally with SQLite full-text search, and each
+            answer shows which notes it used.
+          </p>
+          <ul class="metrics">
+            <li><b>~1.4 GB RAM</b><span>default model, no GPU; ~1.0 GB in lite mode</span></li>
+            <li><b>6 models</b><span>benchmarked on CPU before choosing Qwen3.5-2B</span></li>
+            <li><b>171 tests</b><span>6 tutoring modes, 3 levels, a homework-hint guard</span></li>
+          </ul>
+          <figure class="terminal" aria-label="Measured CPU inference for the three Edu.ai models">
+            <figcaption>measured on CPU, 4 threads · llama.cpp</figcaption>
+<pre><span class="o">model            mode      peak RAM   speed</span>
+Qwen3.5-0.8B     <span class="p">lite</span>      1.0 GB     40 tok/s
+Qwen3.5-2B       <span class="p">default</span>   1.4 GB     21 tok/s
+Granite-4.2-3B   <span class="p">quality</span>   2.4 GB     13 tok/s</pre>
+          </figure>
+          <p class="stack">Python · llama.cpp (CPU) · Qwen3.5 GGUF · SQLite FTS5 · pytest</p>
+          <p class="links"><a href="https://github.com/HarshKnight2477/Edu.ai">Source on GitHub ↗</a></p>
         </div>
       </article>
 
@@ -190,7 +227,7 @@
           <dl class="skills">
             <div><dt>Languages</dt><dd>Python, C++, SQL</dd></div>
             <div><dt>Backend</dt><dd>FastAPI, REST, WebSockets, database design</dd></div>
-            <div><dt>ML / AI</dt><dd>PyTorch, scikit-learn, YOLOv8, InsightFace, OpenCV, NLP, local LLMs (Ollama)</dd></div>
+            <div><dt>ML / AI</dt><dd>PyTorch, scikit-learn, YOLOv8, InsightFace, OpenCV, NLP, local LLMs (llama.cpp, Ollama), model benchmarking</dd></div>
             <div><dt>Data</dt><dd>NumPy, Pandas, Power BI, Tableau</dd></div>
             <div><dt>Cloud</dt><dd>AWS fundamentals, Render</dd></div>
           </dl>
