@@ -103,7 +103,8 @@ h1 {
   font-variation-settings: "opsz" 144;
 }
 h1 em { font-style: italic; color: var(--accent); }
-.lede { font-size: 1.15rem; max-width: 38rem; margin: 0 0 2rem; }
+.lede { font-size: 1.15rem; max-width: 38rem; margin: 0 0 1rem; }
+.lede:last-of-type { margin-bottom: 2rem; }
 
 .facts { display: grid; gap: .4rem; margin: 0 0 2.25rem; font-size: .95rem; }
 .facts div { display: grid; grid-template-columns: 6.5rem 1fr; gap: 1rem; }
@@ -235,6 +236,6 @@ footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid var(--rule
   .metrics li, .metrics li + li { padding: .8rem 0; border-left: 0; }
   .metrics li + li { border-top: 1px solid var(--rule); }
   .minor, .grid, .langs { grid-template-columns: 1fr; gap: 2rem; }
-  .facts div { grid-template-columns: 5rem 1fr; }
+  .facts div { grid-template-columns: 5.75rem 1fr; gap: .75rem; }
   .papers li { padding-left: 2.2rem; }
 }
